@@ -9,9 +9,27 @@ export function SessionCode({ code }: Props) {
 
   const handleCopy = async () => {
     const url = `${window.location.origin}/join/${code}`
-    await navigator.clipboard.writeText(url)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(url)
+      } else {
+        // Fallback pour HTTP ou navigateurs sans clipboard API
+        const textarea = document.createElement('textarea')
+        textarea.value = url
+        textarea.style.position = 'fixed'
+        textarea.style.opacity = '0'
+        document.body.appendChild(textarea)
+        textarea.focus()
+        textarea.select()
+        document.execCommand('copy')
+        document.body.removeChild(textarea)
+      }
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      // Dernier recours : afficher l'URL pour copie manuelle
+      prompt('Copie ce lien :', url)
+    }
   }
 
   return (
