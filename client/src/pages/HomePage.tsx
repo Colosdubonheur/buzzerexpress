@@ -52,46 +52,56 @@ export function HomePage() {
 
   return (
     <div className="min-h-dvh bg-gradient-to-br from-indigo-50 via-white to-purple-50 flex flex-col items-center justify-center p-6">
-      <div className="w-full max-w-lg">
+      <div className="w-full max-w-3xl">
         {/* Header */}
-        <div className="text-center mb-10">
-          <div className="text-6xl mb-3">🔔</div>
-          <h1 className="text-4xl font-black text-gray-900 tracking-tight">
+        <div className="text-center mb-12">
+          <div className="text-7xl mb-4">🔔</div>
+          <h1 className="text-5xl font-black text-gray-900 tracking-tight">
             Buzzer<span className="text-indigo-600">Express</span>
           </h1>
-          <p className="text-gray-500 mt-2">Buzzer en temps réel pour vos animations</p>
+          <p className="text-gray-500 mt-3 text-lg">Buzzer en temps réel pour vos animations</p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-2 md:gap-8">
           {/* Créer une session */}
-          <div className="bg-white rounded-3xl p-6 shadow-lg border border-indigo-100">
-            <h2 className="text-xl font-bold text-gray-800 mb-2">Animateur</h2>
-            <p className="text-sm text-gray-500 mb-5">
-              Crée une session et partage le code avec tes participants.
-            </p>
+          <div className="bg-white rounded-3xl p-8 shadow-lg border border-indigo-100 flex flex-col">
+            <div className="mb-6">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-indigo-100 rounded-2xl mb-4">
+                <span className="text-2xl">🎙️</span>
+              </div>
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">Animateur</h2>
+              <p className="text-gray-500">
+                Crée une session et partage le code avec tes participants.
+              </p>
+            </div>
             <button
               onClick={handleCreate}
               disabled={creating}
-              className="w-full py-4 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-bold text-lg rounded-2xl transition-all disabled:opacity-60"
+              className="mt-auto w-full py-4 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-bold text-lg rounded-2xl transition-all disabled:opacity-60 cursor-pointer"
             >
               {creating ? '⏳ Création…' : '✨ Nouvelle session'}
             </button>
           </div>
 
           {/* Rejoindre */}
-          <div className="bg-white rounded-3xl p-6 shadow-lg border border-orange-100">
-            <h2 className="text-xl font-bold text-gray-800 mb-2">Participant</h2>
-            <p className="text-sm text-gray-500 mb-4">
-              Entre le code de la session et ton prénom.
-            </p>
-            <form onSubmit={handleJoin} className="flex flex-col gap-3">
+          <div className="bg-white rounded-3xl p-8 shadow-lg border border-orange-100 flex flex-col">
+            <div className="mb-6">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-orange-100 rounded-2xl mb-4">
+                <span className="text-2xl">🎮</span>
+              </div>
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">Participant</h2>
+              <p className="text-gray-500">
+                Entre le code de la session et ton prénom.
+              </p>
+            </div>
+            <form onSubmit={handleJoin} className="flex flex-col gap-3 mt-auto">
               <input
                 type="text"
-                placeholder="Code (ex: ABCD)"
+                placeholder="Code de session (ex : ABCD)"
                 value={code}
                 onChange={(e) => setCode(e.target.value.toUpperCase())}
                 maxLength={4}
-                className="px-4 py-3 border-2 border-gray-200 rounded-xl text-center text-xl font-bold tracking-widest uppercase focus:border-orange-400 focus:outline-none"
+                className="px-4 py-3 border-2 border-gray-200 rounded-xl text-center text-2xl font-bold tracking-[0.3em] uppercase focus:border-orange-400 focus:outline-none placeholder:tracking-normal placeholder:text-sm placeholder:font-normal placeholder:text-gray-400"
               />
               <input
                 type="text"
@@ -107,7 +117,7 @@ export function HomePage() {
               <button
                 type="submit"
                 disabled={joining}
-                className="py-4 bg-orange-500 hover:bg-orange-600 active:scale-95 text-white font-bold text-lg rounded-2xl transition-all disabled:opacity-60"
+                className="py-4 bg-orange-500 hover:bg-orange-600 active:scale-95 text-white font-bold text-lg rounded-2xl transition-all disabled:opacity-60 cursor-pointer"
               >
                 {joining ? '⏳ Connexion…' : '🎮 Rejoindre'}
               </button>
